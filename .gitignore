@@ -1,0 +1,27 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+target/
+build/
+*.class
+*.jar
+*.zip
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Python (bytecode)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Gradle
+.gradle/

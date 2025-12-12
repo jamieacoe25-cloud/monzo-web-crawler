@@ -1,6 +1,18 @@
 # Java Web Crawler
 
-A Java web crawler which can loop through [crawl](https://crawlme.monzo.com/) Here are some of the features.
+A Java web crawler which can loop through monzo crawl site.  Here are some of the features.
+
+## Features
+- **Concurrent crawling** using `ExecutorService` and `AtomicInteger` for active task tracking.  
+- **Domain filtering** to restrict crawling to a specific domain.  
+- **HTML fetching** via `HtmlFetcher` with `HttpClient`.  
+- **Link extraction** using Jsoup (`LinkExtractor`).    
+- **Thread-safe URL tracking** using `ConcurrentHashMap` to avoid duplicates.  
+- **Crawl log output** written to `crawler_output.txt`.  
+
+## Steps to run web-crawler
+- Go to root directory
+- run `java -cp "target\classes;lib/jsoup-1.21.2.jar" com.monzo.crawler.Main`
 
 ### **Crawler.java**
 - **Purpose:** Main engine for the crawler.  
@@ -39,22 +51,6 @@ A Java web crawler which can loop through [crawl](https://crawlme.monzo.com/) He
 - **Purpose:** Extracts links from HTML documents.  
 - Uses Jsoup to select all `<a href>` elements.  
 - Returns a list of absolute URLs, ignoring empty links.
-
-
-
-## Features
-
-- **Concurrent crawling** using `ExecutorService` and `AtomicInteger` for active task tracking.  
-- **Domain filtering** to restrict crawling to a specific domain.  
-- **HTML fetching** via `HtmlFetcher` with `HttpClient`.  
-- **Link extraction** using Jsoup (`LinkExtractor`).    
-- **Thread-safe URL tracking** using `ConcurrentHashMap` to avoid duplicates.  
-- **Crawl log output** written to `crawler_output.txt`.  
-
-
-## Steps tpo run,
-- Go to root directory
-- run `java -cp "target\classes;lib/jsoup-1.21.2.jar" com.monzo.crawler.Main`
 
 ## Future Enhancements
 - Add robots.txt compliance

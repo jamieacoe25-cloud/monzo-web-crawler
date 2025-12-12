@@ -12,6 +12,9 @@ public class LinkExtractor {
 
     private static final String LINK_SELECTOR = "a[href]";
 
+    /*
+     * Extract links from jsoup document.
+     */
     public List<String> extractLinks(Document doc) {
         Elements links = doc.select(LINK_SELECTOR);
         return links.stream()

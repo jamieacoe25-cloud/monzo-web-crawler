@@ -15,6 +15,9 @@ public class HtmlFetcher {
 
     private HttpClient httpClient;
 
+    /*
+     * Constructor.
+     */
     public HtmlFetcher() {
         this.httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
@@ -22,10 +25,16 @@ public class HtmlFetcher {
                 .build();
     }
 
+    /*
+     * Testing Constructor.
+     */
     public HtmlFetcher(final HttpClient client) {
         this.httpClient = client;
     }
 
+    /*
+     * Fetch Document from url.
+     */
     public Document fetch(String url) {
         try {
             HttpRequest request = HttpRequest.newBuilder()

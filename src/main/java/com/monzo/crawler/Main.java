@@ -8,7 +8,14 @@ import com.monzo.crawler.utils.DomainFilter;
 import com.monzo.crawler.utils.HtmlFetcher;
 import com.monzo.crawler.utils.LinkExtractor;
 
+/*
+ * Main class
+*/
 public class Main {
+
+    /*
+     * Main method to instantiate classes, set timer and start crawler.
+     */
     public static void main(String[] args) throws InterruptedException {
         CrawlConfig config = new CrawlConfig(10, 100, 10);
         DomainFilter filter = new DomainFilter("crawlme.monzo.com");

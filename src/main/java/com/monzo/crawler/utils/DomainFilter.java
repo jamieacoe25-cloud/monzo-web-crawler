@@ -13,6 +13,9 @@ public class DomainFilter {
         this.allowedDomain = allowedDomain;
     }
 
+    /*
+     * Check if URL is allowed.
+     */
     public boolean isAllowed(String url) {
         if (url == null || url.isBlank()) {
             return false;

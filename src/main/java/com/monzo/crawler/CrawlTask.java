@@ -12,12 +12,18 @@ public class CrawlTask implements Runnable {
     private final int depth;
     private final Crawler crawler;
 
+    /*
+     * Constructor.
+     */
     public CrawlTask(String url, int depth, Crawler crawler) {
         this.url = url;
         this.depth = depth;
         this.crawler = crawler;
     }
 
+    /*
+     * Runnable Crawl task method.
+     */
     @Override
     public void run() {
         if (!crawler.getDomainFilter().isAllowed(url)) {

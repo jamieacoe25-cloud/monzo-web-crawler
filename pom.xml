@@ -10,7 +10,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>monzo-web-crawler</name>
+    <name>web-crawler</name>
     <description>A monzo web crawler project</description>
 
     <properties>
@@ -37,7 +37,6 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

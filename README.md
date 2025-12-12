@@ -31,8 +31,6 @@ A Java web crawler which can loop through monzo crawl site.  Here are some of th
 - Initializes `CrawlConfig`, `DomainFilter`, `HtmlFetcher`, and `LinkExtractor`.  
 - Starts crawling from a given URL and measures execution time.
 
----
-
 ### **CrawlConfig.java**
 - **Purpose:** Configuration for the crawler.  
 - Holds `maxDepth`, `timeoutInMs`, `threads`, and `maxQueueSize`.  

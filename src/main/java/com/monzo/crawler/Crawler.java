@@ -3,11 +3,10 @@ package com.monzo.crawler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,7 +27,8 @@ public class Crawler {
     private final LinkExtractor extractor;
     private final DomainFilter filter;
     private final AtomicInteger activeTasks;
-    private final BlockingQueue<UrlDepth> urlQueue;
+    private final CountDownLatch done = new CountDownLatch(1);
+    // private final BlockingQueue<UrlDepth> urlQueue; // this is not used.
 
     /*
      * Constructor.
@@ -41,7 +41,8 @@ public class Crawler {
         this.executor = Executors.newFixedThreadPool(config.getThreads());
         this.crawledLog = new ArrayList<>();
         this.activeTasks = new AtomicInteger(0);
-        this.urlQueue = new LinkedBlockingQueue<UrlDepth>(config.getMaxQueueSize());
+        // this.urlQueue = new LinkedBlockingQueue<UrlDepth>(config.getMaxQueueSize());
+        // // this is not being used.
     }
 
     /*
@@ -51,13 +52,14 @@ public class Crawler {
 
         crawl(startUrl, 0);
 
-        while (activeTasks.get() > 0) {
-            UrlDepth urlDepth = urlQueue.poll(config.getTimeoutInMS(), TimeUnit.MILLISECONDS);
-            if (urlDepth != null) {
-                crawl(urlDepth.url, urlDepth.depth);
-            }
-        }
-
+        // while (activeTasks.get() > 0) {
+        // UrlDepth urlDepth = urlQueue.poll(config.getTimeoutInMS(),
+        // TimeUnit.MILLISECONDS);
+        // if (urlDepth != null) {
+        // crawl(urlDepth.url, urlDepth.depth);
+        // }
+        // }
+        done.await();
         executor.shutdown();
         executor.awaitTermination(1, TimeUnit.MINUTES);
         System.out.println("crawl finished, total URLs Visited: " + visited.size());
@@ -79,7 +81,9 @@ public class Crawler {
             try {
                 new CrawlTask(url, depth, this).run();
             } finally {
-                activeTasks.decrementAndGet();
+                if (activeTasks.decrementAndGet() == 0) {
+                    done.countDown();
+                }
             }
         });
     }

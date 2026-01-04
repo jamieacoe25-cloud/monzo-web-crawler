@@ -55,3 +55,5 @@ A Java web crawler which can loop through monzo crawl site.  Here are some of th
 - Implement rate limiting and polite crawling
 - Support asynchronous fetch with CompletableFuture for larger sites
 - Store logs in database or CSV for analysis
+- Add logs instead of print lines
+- Use lombok annoations.
